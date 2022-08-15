@@ -1,0 +1,107 @@
+.clock {
+  width: 150px;
+  height: 150px;
+  margin: auto;
+  border: 3px solid black;
+  border-radius: 100%;
+}
+
+.line,
+.arrow,
+.middle-point {
+  display: block;
+  position: absolute;
+  width: 150px;
+  height: 150px;
+}
+
+.line::after {
+  margin-left: -1px;
+  content: "";
+  height: 8px;
+  width: 1px;
+  display: block;
+  position: absolute;
+  background-color: rgb(75, 75, 75);
+  top: 3px;
+  left: 50%;
+}
+
+.line-big::after {
+  content: "";
+  height: 8px;
+  width: 2px;
+  display: block;
+  position: absolute;
+  background-color: #000;
+  top: 3px;
+  left: 50%;
+}
+
+.second::after {
+  margin-left: -1px;
+  content: "";
+  height: 82px;
+  width: 2px;
+  display: block;
+  position: absolute;
+  background-color: red;
+  top: 50%;
+  left: 50%;
+  margin-top: -10px;
+}
+
+.minute::after {
+  margin-left: -2px;
+  content: "";
+  height: 65px;
+  width: 4px;
+  border-radius: 20%;
+  display: block;
+  position: absolute;
+  background-color: #000;
+  top: 50%;
+  left: 50%;
+  margin-top: -3px;
+}
+
+.hour::after {
+  margin-left: -3px;
+  content: "";
+  height: 50px;
+  width: 6px;
+  border-radius: 20%;
+  display: block;
+  position: absolute;
+  background-color: #000;
+  top: 50%;
+  left: 50%;
+  margin-top: -3px;
+}
+
+.middle-point::after {
+  content: "";
+  height: 2px;
+  width: 2px;
+  border-radius: 100%;
+  display: block;
+  position: absolute;
+  background-color: #fff;
+  top: 50%;
+  left: 50%;
+  margin-top: -1px;
+  margin-left: -1px;
+}
+
+.city-input {
+  display: block;
+  position: relative;
+  top: 180px;
+}
+
+.city-submit {
+  display: block;
+  position: relative;
+  top: 190px;
+  margin: auto;
+}
