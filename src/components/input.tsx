@@ -28,7 +28,7 @@ const Input: React.FC<IInput> = ({ onCityChange }) => {
   )
 }
 
-async function getTime(city: string): Promise<ITime> {
+export async function getTime(city: string): Promise<ITime> {
   const response = await fetch(`https://timezone.abstractapi.com/v1/current_time/?api_key=15d7798fd1054f0dace9daef5dabb380&location=${city}`);
   const cityResponse = await response.json();
   const time = cityResponse.datetime.slice(11);

@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles/style.css';
 import Line from './components/line';
 import Input from './components/input';
 import { ArrowHour, ArrowMinute, ArrowSecond } from './styles/arrowsStyle';
+import { getTime } from './components/input';
 
 export interface ITime {
   hours: number;
@@ -10,16 +11,22 @@ export interface ITime {
   seconds: number;
 }
 
-const date = new Date();
-
-const currentTime = {
-  hours: date.getHours(),
-  minutes: date.getMinutes(),
-  seconds: date.getSeconds(),
+const initDegree = { 
+  secondDegree: 0, 
+  minuteDegree: 0, 
+  hourDegree: 0 
 }
 
 const Clock: React.FC = () => {
-  const [degrees, setDegrees] = useState(getDegrees(currentTime));
+  const [degrees, setDegrees] = useState(initDegree);
+  useEffect(() => {
+    getCurrentCity().then(async (res) => {
+      const time = await getTime(res);
+      const newDegrees = getDegrees(time);
+      setDegrees(newDegrees);
+    })
+  }, []);
+
   const onCityChange = (newTime: ITime) => {
     setDegrees(getDegrees(newTime));
   }
@@ -44,6 +51,14 @@ function getDegrees({ hours, minutes, seconds }: ITime) {
   const minuteDegree = 360 / 60 * minutes + 6 / 60 * seconds;
   const hourDegree = 360 / 12 * hours + 30 / 60 * minutes + 0.5 / 60 * seconds;
   return ({ secondDegree: secondDegree, minuteDegree: minuteDegree, hourDegree: hourDegree });
+}
+
+async function getCurrentCity() {
+  try {
+    const request = await fetch("https://ipinfo.io/json?token=b078a87c1f8ed8");
+    const json = await request.json();
+    return json.city;
+  } catch (err) {};
 }
 
 export default Clock;
